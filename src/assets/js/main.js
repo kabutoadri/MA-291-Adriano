@@ -4,6 +4,7 @@ import fetchSalesPoints from './fetchSalesPoints.js';
 const loadSnacksBtn = document.querySelector('#load-snacks-btn');
 const snacksContainer = document.querySelector('#snacks-container');
 const feedback = document.querySelector('#feedback');
+const salesContainer = document.querySelector('#sales-points-container');
 
 // TODO task004: ajouter les références DOM nécessaires pour les points de vente
 // TODO task004: prévoir une variable d'état pour éviter de recharger inutilement les données
@@ -40,5 +41,27 @@ function displaySnacks(snacks) {
 }
 
 // TODO task003: créer une fonction loadSalesPoints
+async function loadSalesPoints() {
+  feedback.textContent = '';
+
+  try {
+    const SalesPoints = await fetchSalesPoints();
+    displaySalesPoints(SalesPoints);
+  } catch (error) {
+    console.error(error);
+    feedback.textContent = 'Impossible de charger les points de vente.';
+  }
+}
 // TODO task003: créer une fonction displaySalesPoints
+function displaySalesPoints(SalesPoints) {
+  salesContainer.innerHTML = SalesPoints.map((sale) => `
+    <article class="sales-point-card">
+        <h3>${sale.building}</h3>
+        <p><strong>Salle</strong>${sale.room}</p>
+        <p><strong>Horaires :</strong>${sale.openingHours}</p>
+        <p><strong>Email :</strong>${sale.email}</p>
+    </article>
+  `).join('');
+}
+await loadSalesPoints();
 // TODO task005: afficher un message lisible si le chargement échoue
