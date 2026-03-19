@@ -66,14 +66,16 @@ function displaySnacks(snacks) {
 
 // TODO task003: créer une fonction loadSalesPoints
 async function loadSalesPoints() {
-  feedback.textContent = '';
-
+  feedback.textContent = '';  // prépare le feed back sur le chargement du json
+  // essaye de charger le json
   try {
     const SalesPoints = await fetchSalesPoints();
     displaySalesPoints(SalesPoints);
-  } catch (error) {
-    console.error(error);
-    feedback.textContent = 'Impossible de charger les points de vente.';
+  }
+  // attrape une erreur
+  catch (error) {
+    console.error(error); // affiche l'erreur dans la console
+    feedback.textContent = 'Impossible de charger les points de vente.';  // message d'erreur dans le feedback
   }
 }
 // TODO task003: créer une fonction displaySalesPoints
