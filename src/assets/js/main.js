@@ -7,10 +7,34 @@ const feedback = document.querySelector('#feedback');
 const salesContainer = document.querySelector('#sales-points-container');
 
 // TODO task004: ajouter les références DOM nécessaires pour les points de vente
+const loadSalesPointsBtn = document.querySelector('#load-sales-btn');
 // TODO task004: prévoir une variable d'état pour éviter de recharger inutilement les données
+let statesSalesPoint = false
+let visibleSalesPoint = false
 
 loadSnacksBtn.addEventListener('click', loadSnacks);
 // TODO task004: brancher ici l'événement du bouton des points de vente
+loadSalesPointsBtn.addEventListener('click', hiddenSalesPoints);
+
+// Fonction qui affiche ou masque les points de vente sans recharger la page à chaque fois
+function hiddenSalesPoints() {
+  if (!statesSalesPoint) {
+    loadSalesPoints();
+    statesSalesPoint = true;
+  }
+  else if (!visibleSalesPoint) {
+    salesContainer.style.visibility = 'hidden';
+    visibleSalesPoint = true;
+  }
+  else{
+    salesContainer.style.visibility = 'visible';
+    visibleSalesPoint = false;
+  }
+
+  loadSalesPointsBtn.textContent = visibleSalesPoint
+      ? 'Afficher les points de vente'
+      : 'Masquer les points de vente';
+}
 
 async function loadSnacks() {
   feedback.textContent = '';
@@ -63,5 +87,4 @@ function displaySalesPoints(SalesPoints) {
     </article>
   `).join('');
 }
-await loadSalesPoints();
 // TODO task005: afficher un message lisible si le chargement échoue
