@@ -47,7 +47,7 @@ async function loadSnacks() {
     feedback.textContent = 'Impossible de charger les snacks.';
   }
 }
-
+// Fonction qui affiche les snacks en construisant les balises HTML
 function displaySnacks(snacks) {
   snacksContainer.innerHTML = snacks.map((snack) => `
     <article class="card">
@@ -79,6 +79,7 @@ async function loadSalesPoints() {
   }
 }
 // TODO task003: créer une fonction displaySalesPoints
+// Fonction qui affiche les points de vente en construisant les balises HTML
 function displaySalesPoints(SalesPoints) {
   salesContainer.innerHTML = SalesPoints.map((sale) => `
     <article class="sales-point-card">
